@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Terraza | Restaurante</title>
+  <meta name="description" content="Descubre La Terraza, un restaurante ficticio con cocina de autor y un ambiente acogedor.">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --verde: #124c3b;
+      --verde-claro: #e5eee6;
+      --crema: #faf8f2;
+      --texto: #24332c;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--crema);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      height: 78px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 248, 242, 0.97);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #e8e4d9;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 27px;
+      font-weight: bold;
+      color: var(--verde);
+    }
+
+    .logo span {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a:hover {
+      color: #17805e;
+    }
+
+    .boton {
+      display: inline-block;
+      padding: 13px 23px;
+      background: var(--verde);
+      color: white;
+      border: 1px solid var(--verde);
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .boton:hover {
+      background: #23765b;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      padding: 65px 8%;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.75), rgba(0,0,0,.08)),
+        url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .hero-content {
+      max-width: 560px;
+      animation: aparecer 1s ease;
+    }
+
+    .etiqueta {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, serif;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 82px);
+      margin-bottom: 18px;
+    }
+
+    .hero p:not(.etiqueta) {
+      font-size: 19px;
+      margin-bottom: 28px;
+    }
+
+    section {
+      padding: 75px 8%;
+      scroll-margin-top: 85px;
+    }
+
+    .beneficios {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      background: white;
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+
+    .beneficio {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .icono {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .beneficio h3 {
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .beneficio p {
+      font-size: 14px;
+      color: #69736c;
+    }
+
+    .titulo-seccion {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .titulo-seccion .etiqueta {
+      color: var(--verde);
+    }
+
+    .titulo-seccion h2 {
+      font-size: clamp(32px, 4vw, 45px);
+      margin-bottom: 12px;
+    }
+
+    .platos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .plato {
+      background: white;
+      border: 1px solid #e9e5dc;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .plato:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px #193b2715;
+    }
+
+    .plato img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .plato-info {
+      padding: 18px;
+    }
+
+    .plato h3 {
+      font-size: 19px;
+      margin-bottom: 7px;
+    }
+
+    .plato p {
+      color: #69736c;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .precio {
+      color: var(--verde);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .sobre {
+      background: var(--verde-claro);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .sobre img {
+      width: 100%;
+      height: 370px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .sobre h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .sobre p {
+      margin-bottom: 20px;
+    }
+
+    .reservas {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .reserva-imagen {
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .reserva-form h2 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .reserva-form > p {
+      color: #69736c;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .campo label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .campo input, .campo select, .campo textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d8dcd5;
+      border-radius: 7px;
+      background: white;
+      font: inherit;
+    }
+
+    .campo input:focus, .campo select:focus {
+      outline: 2px solid #8cb9a3;
+    }
+
+    .completo {
+      grid-column: 1 / -1;
+    }
+
+    form .boton {
+      width: 100%;
+    }
+
+    #mensaje {
+      display: none;
+      padding: 15px;
+      background: var(--verde-claro);
+      color: var(--verde);
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    footer {
+      background: #153e32;
+      color: white;
+      padding: 40px 8% 20px;
+    }
+
+    .footer-contenido {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    footer h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: #d4e0d9;
+    }
+
+    .copyright {
+      border-top: 1px solid #ffffff30;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 850px) {
+      header {
+        height: auto;
+        padding: 18px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      nav .boton {
+        padding: 9px 13px;
+      }
+
+      .beneficios, .platos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sobre, .reservas {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        justify-content: center;
+      }
+
+      nav {
+        justify-content: center;
+        font-size: 13px;
+      }
+
+      .hero {
+        min-height: 430px;
+        padding: 45px 7%;
+      }
+
+      section {
+        padding: 50px 6%;
+      }
+
+      .beneficios, .platos, form, .footer-contenido {
+        grid-template-columns: 1fr;
+      }
+
+      .plato img {
+        height: 230px;
+      }
+
+      .sobre img, .reserva-imagen {
+        height: 280px;
+        min-height: 0;
+      }
+
+      .reserva-form h2, .sobre h2 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="#inicio">
+      La Terraza
+      <span>RESTAURANTE</span>
+    </a>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#carta">Carta</a>
+      <a href="#reservar">Reservar</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <a class="boton" href="#reservar">Reservar mesa ↗</a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <p class="etiqueta">Buena comida · Buenos momentos</p>
+        <h1>La Terraza</h1>
+        <p>Un lugar donde la buena comida y la mejor compañía se encuentran.</p>
+        <a class="boton" href="#reservar">Reservar mi mesa →</a>
+      </div>
+    </section>
+
+    <section class="beneficios">
+      <div class="beneficio">
+        <div class="icono">🍃</div>
+        <h3>Ingredientes frescos</h3>
+        <p>Productos de temporada y de calidad.</p>
+      </div>
+
+      <div class="beneficio">
+        <div class="icono">👨‍🍳</div>
+        <h3>Cocina de autor</h3>
+        <p>Platos preparados con mucho cuidado.</p>
+      </div>
+
+      <div class="beneficio">
+        <div class="icono">🕯️</div>
+        <h3>Ambiente acogedor</h3>
+        <p>Un espacio para disfrutar y compartir.</p>
+      </div>
+
+      <div class="beneficio">
+        <div class="icono">⭐</div>
+        <h3>Experiencia especial</h3>
+        <p>Pequeños detalles que marcan la diferencia.</p>
+      </div>
+    </section>
+
+    <section id="carta">
+      <div class="titulo-seccion">
+        <p class="etiqueta">Nuestra carta</p>
+        <h2>Platos destacados</h2>
+        <p>Una selección de platos de ejemplo para nuestra web.</p>
+      </div>
+
+      <div class="platos">
+        <article class="plato">
+          <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=700&q=80" alt="Plato de salmón con verduras" loading="lazy">
+          <div class="plato-info">
+            <h3>Salmón a la parrilla</h3>
+            <p>Con verduras de temporada y salsa de limón.</p>
+            <div class="precio">16 €</div>
+          </div>
+        </article>
+
+        <article class="plato">
+          <img src="https://images.unsplash.com/photo- pasta?auto=format&fit=crop&w=700&q=80" alt="Plato de pasta" loading="lazy">
+          <div class="plato-info">
+            <h3>Pasta cremosa</h3>
+            <p>Pasta con una suave salsa y parmesano.</p>
+            <div class="precio">14 €</div>
+          </div>
+        </article>
+
+        <article class="plato">
+          <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=700&q=80" alt="Plato de carne" loading="lazy">
+          <div class="plato-info">
+            <h3>Entrecot a la parrilla</h3>
+            <p>Con patatas y verduras asadas.</p>
+            <div class="precio">22 €</div>
+          </div>
+        </article>
+
+        <article class="plato">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=80" alt="Postre de chocolate" loading="lazy">
+          <div class="plato-info">
+            <h3>Postre de chocolate</h3>
+            <p>Un dulce final para la comida.</p>
+            <div class="precio">7 €</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sobre">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85" alt="Interior elegante de restaurante" loading="lazy">
+
+      <div>
+        <p class="etiqueta">Nuestra filosofía</p>
+        <h2>La buena mesa nos une</h2>
+        <p>En La Terraza creemos que una comida especial empieza con buenos ingredientes y termina con grandes recuerdos.</p>
+        <p>Esta página es un proyecto de práctica: el restaurante, su historia y sus servicios son ficticios.</p>
+        <a class="boton" href="#carta">Descubrir la carta →</a>
+      </div>
+    </section>
+
+    <section class="reservas" id="reservar">
+      <img class="reserva-imagen" src="https://images.unsplash.com/photo-1515003197210-e0cd7184f8b5?auto=format&fit=crop&w=900&q=85" alt="Mesa preparada para una cena" loading="lazy">
+
+      <div class="reserva-form">
+        <p class="etiqueta">Tu mesa te espera</p>
+        <h2>Reserva tu mesa</h2>
+        <p>Completa el formulario para probar cómo sería una reserva.</p>
+
+        <form id="formReserva">
+          <div class="campo completo">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Escribe tu nombre" required>
+          </div>
+
+          <div class="campo">
+            <label for="personas">Número de personas</label>
+            <select id="personas" name="personas" required>
+              <option value="">Selecciona</option>
+              <option>1 persona</option>
+              <option>2 personas</option>
+              <option>3 personas</option>
+              <option>4 personas</option>
+              <option>5 personas</option>
+              <option>6 personas</option>
+              <option>7 o más personas</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" name="fecha" type="date" required>
+          </div>
+
+          <div class="campo">
+            <label for="hora">Hora</label>
+            <select id="hora" name="hora" required>
+              <option value="">Selecciona</option>
+              <option>13:00</option>
+              <option>13:30</option>
+              <option>14:00</option>
+              <option>14:30</option>
+              <option>20:00</option>
+              <option>20:30</option>
+              <option>21:00</option>
+              <option>21:30</option>
+            </select>
+          </div>
+
+          <div class="campo completo">
+            <label for="correo">Correo electrónico (opcional)</label>
+            <input id="correo" name="correo" type="email" placeholder="tunombre@ejemplo.com">
+          </div>
+
+          <button class="boton completo" type="submit">Probar reserva →</button>
+        </form>
+
+        <div id="mensaje" role="status"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="footer-contenido">
+      <div>
+        <h3>La Terraza</h3>
+        <p>Buena comida, mejores momentos.</p>
+        <p>Restaurante ficticio para practicar desarrollo web.</p>
+      </div>
+
+      <div>
+        <h3>Contacto de ejemplo</h3>
+        <p>Dirección: Calle del Sol, 12</p>
+        <p>Barcelona, España</p>
+        <p>Teléfono ficticio: +34 000 000 000</p>
+      </div>
+
+      <div>
+        <h3>Horario de ejemplo</h3>
+        <p>Lunes a domingo</p>
+        <p>13:00–16:00 y 20:00–23:30</p>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © 2026 La Terraza · Proyecto ficticio de práctica
+    </div>
+  </footer>
+
+  <script>
+    const fecha = document.getElementById("fecha");
+    const hoy = new Date();
+    const fechaLocal = new Date(
+      hoy.getTime() - hoy.getTimezoneOffset() * 60000
+    ).toISOString().split("T")[0];
+
+    fecha.min = fechaLocal;
+
+    document.getElementById("formReserva").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const mensaje = document.getElementById("mensaje");
+
+      mensaje.style.display = "block";
+      mensaje.textContent = "¡Gracias, " + nombre +
+        "! El formulario funciona como demostración, pero no se ha enviado ninguna reserva real.";
+
+      mensaje.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+  </script>
+
+</body>
+</html>
